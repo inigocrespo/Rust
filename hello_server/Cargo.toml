@@ -1,5 +1,5 @@
 [package]
-name = "hello"
+name = "hello_server"
 version = "0.1.0"
 authors = ["inigo.crespo@bluetab.net <inigo.crespo@bluetab.net>"]
 edition = "2018"

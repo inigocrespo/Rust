@@ -1,4 +1,4 @@
-use hello::ThreadPool;
+use hello_server::ThreadPool;
 
 use std::io::prelude::*;
 use std::net::TcpListener;
@@ -28,9 +28,7 @@ fn handle_connection(mut stream: TcpStream) {
 
     let get = b"GET / HTTP/1.1\r\n";
     let sleep = b"GET /sleep HTTP/1.1\r\n";
-
-    println!("{}", std::str::from_utf8(&buffer).unwrap());
-
+    
     let (status_line, filename) = if buffer.starts_with(get) {
         ("HTTP/1.1 200 OK\r\n\r\n", "hello.html")
     } else if buffer.starts_with(sleep) {
