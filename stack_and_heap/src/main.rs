@@ -6,7 +6,7 @@ struct Point {
 }
 
 fn origin() -> Point {
-    Point{x: 0.0, _y: 0.0}
+    Point { x: 0.0, _y: 0.0 }
 }
 
 fn stack_and_heap() {
@@ -18,7 +18,6 @@ fn stack_and_heap() {
 
     let p3 = *p2;
     println!("p3.x = {}", p3.x);
-
 }
 
 fn main() {
