@@ -1,5 +1,5 @@
 trait Animal {
-    fn create(name: &'static str) -> Self;
+    fn create(name: &'static str) -> Self where Self:Sized;
 
     fn name(&self) -> &'static str;
 
@@ -32,7 +32,7 @@ struct Cat {
 
 impl Animal for Cat {
     fn create(name: &'static str) -> Cat {
-        Cat { name }
+       Cat { name }
     }
 
     fn name(&self) -> &'static str {
@@ -44,10 +44,30 @@ impl Animal for Cat {
     }
 }
 
+enum Creature {
+    Human(Human),
+    Cat(Cat),
+}
 
 fn main() {
     let mut creatures = Vec::new();
-    creatures.push(Human{name: "Jone"});
-    creatures.push(Cat{name: "Catwoman"});
+    //creatures.push(Human{name: "Jone"});
+    //creatures.push(Cat{name: "Catwoman"});
+    creatures.push(Creature::Human(Human { name: "Jone" }));
+    creatures.push(Creature::Cat(Cat { name: "Catwoman" }));
 
+    for c in creatures {
+        match c {
+            Creature::Human(h) => h.talk(),
+            Creature::Cat(c) => c.talk(),
+        }
+    }
+
+    let mut animals: Vec<Box<dyn Animal>> = Vec::new();
+    animals.push(Box::new(Human { name: "Jone" }));
+    animals.push(Box::new(Cat { name: "Catwoman" }));
+
+    for a in animals.iter() {
+        a.talk();
+    }
 }
